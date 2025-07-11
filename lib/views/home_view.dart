@@ -40,58 +40,60 @@ class _HomeViewState extends State<HomeView> {
         ),
         backgroundColor: kAppColor,
       ),
-      body: Stack(
-        children: [
-          SafeArea(child: _pages[_currentIndex]),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.all(12),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [bosShadow()],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: BottomNavigationBar(
-                    currentIndex: _currentIndex,
-                    onTap: (index) => setState(() => _currentIndex = index),
-                    type: BottomNavigationBarType.fixed,
-                    backgroundColor: Colors.white,
-                    selectedItemColor: kAppColor,
-                    unselectedItemColor: Colors.black,
-                    selectedLabelStyle: FontStyleApp.white18.copyWith(
-                      fontSize: getResponsiveText(context, 12),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            SafeArea(child: _pages[_currentIndex]),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [bosShadow()],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: BottomNavigationBar(
+                      currentIndex: _currentIndex,
+                      onTap: (index) => setState(() => _currentIndex = index),
+                      type: BottomNavigationBarType.fixed,
+                      backgroundColor: Colors.white,
+                      selectedItemColor: kAppColor,
+                      unselectedItemColor: Colors.black,
+                      selectedLabelStyle: FontStyleApp.white18.copyWith(
+                        fontSize: getResponsiveText(context, 12),
+                      ),
+                      unselectedLabelStyle: FontStyleApp.white18.copyWith(
+                        fontSize: getResponsiveText(context, 12),
+                      ),
+                      elevation: 0,
+                      items: [
+                        _buildNavItem(
+                          'assets/img/Home/lets-icons_paper-light.svg',
+                          'فواتير',
+                          0,
+                        ),
+                        _buildNavItem(
+                          'assets/img/Home/carbon_report-data.svg',
+                          'المواد',
+                          1,
+                        ),
+                        _buildNavItem(
+                          'assets/img/Home/si_inventory-line.svg',
+                          'الحسابات',
+                          2,
+                        ),
+                      ],
                     ),
-                    unselectedLabelStyle: FontStyleApp.white18.copyWith(
-                      fontSize: getResponsiveText(context, 12),
-                    ),
-                    elevation: 0,
-                    items: [
-                      _buildNavItem(
-                        'assets/img/Home/lets-icons_paper-light.svg',
-                        'فواتير',
-                        0,
-                      ),
-                      _buildNavItem(
-                        'assets/img/Home/carbon_report-data.svg',
-                        'المواد',
-                        1,
-                      ),
-                      _buildNavItem(
-                        'assets/img/Home/si_inventory-line.svg',
-                        'الحسابات',
-                        2,
-                      ),
-                    ],
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
