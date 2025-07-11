@@ -1,6 +1,7 @@
 import 'package:chnan/utils/custom_Floating_action_button.dart';
 import 'package:chnan/views/new_material_view.dart';
 import 'package:chnan/widgets/medicine_card.dart';
+import 'package:chnan/widgets/text_field_barcode.dart';
 import 'package:flutter/material.dart';
 
 class MaterialView extends StatelessWidget {
@@ -15,6 +16,7 @@ class MaterialView extends StatelessWidget {
           padding: const EdgeInsets.all(5),
           child: Column(
             children: [
+              TextFieldBaracode(controller: TextEditingController()),
               const SizedBox(height: 10),
               Expanded(
                 child: Center(
@@ -24,8 +26,8 @@ class MaterialView extends StatelessWidget {
                       return MedicineCard(
                         internalCode: '10103',
                         name: 'مذيب  قطارة',
-                        code: 'code',
-                        barcode: '101024',
+                        count: '17',
+                        barcode: '10111111024',
                         unit: 'كغ',
                       );
                     },

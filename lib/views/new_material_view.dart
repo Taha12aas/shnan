@@ -57,7 +57,7 @@ class _NewMedicineViewState extends State<NewMedicineView> {
               const SizedBox(height: 10),
               CustomTextField(
                 focusNode: FocusNode(),
-                hintText: 'كود المادة',
+                hintText: 'بركود المادة',
                 controller: codeController,
               ),
               const SizedBox(height: 10),
@@ -69,7 +69,7 @@ class _NewMedicineViewState extends State<NewMedicineView> {
               const SizedBox(height: 10),
               CustomTextField(
                 focusNode: FocusNode(),
-                hintText: 'باركود المادة',
+                hintText: 'كمية المادة',
                 controller: codeController,
               ),
               const SizedBox(height: 10),
@@ -85,7 +85,6 @@ class _NewMedicineViewState extends State<NewMedicineView> {
 
                 onTap: () {
                   if (_formKey.currentState!.validate()) {
-                    // فقط عرض بيانات حالياً
                     print('الاسم: ${nameController.text}');
                     print('الكود: ${codeController.text}');
                     print('الداخلي: ${internalCodeController.text}');

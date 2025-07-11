@@ -27,56 +27,70 @@ class AccountsView extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 Card(
-                  color: kAppColor,
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 11,
-                          horizontal: 10,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                  elevation: 6,
+                  shadowColor: Colors.black.withOpacity(0.2),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              'طه حوراني',
-                              style: FontStyleApp.white18.copyWith(
-                                fontSize: getResponsiveText(context, 16),
-                              ),
-                            ),
-                            Text(
-                              ': الاسم',
-                              style: FontStyleApp.white18.copyWith(
-                                fontSize: getResponsiveText(context, 16),
-                              ),
+                            Icon(Icons.person, color: kAppColor, size: 30),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  'الاسم',
+                                  style: FontStyleApp.appColor18.copyWith(
+                                    fontSize: getResponsiveText(context, 14),
+                                  ),
+                                ),
+                                Text(
+                                  'طه حوراني',
+                                  style: FontStyleApp.black18.copyWith(
+                                    fontSize: getResponsiveText(context, 16),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 10,
-                          horizontal: 10,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                        const SizedBox(height: 12),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              'مورد',
-                              style: FontStyleApp.white18.copyWith(
-                                fontSize: getResponsiveText(context, 16),
-                              ),
+                            Icon(
+                              Icons.account_balance_wallet,
+                              color: kAppColor,
+                              size: 28,
                             ),
-                            Text(
-                              ': نوع الحساب',
-                              style: FontStyleApp.white18.copyWith(
-                                fontSize: getResponsiveText(context, 16),
-                              ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  'نوع الحساب',
+                                  style: FontStyleApp.appColor18.copyWith(
+                                    fontSize: getResponsiveText(context, 14),
+                                  ),
+                                ),
+                                Text(
+                                  'مورد',
+                                  style: FontStyleApp.black18.copyWith(
+                                    fontSize: getResponsiveText(context, 16),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],

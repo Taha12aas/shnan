@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:chnan/utils/font_style.dart';
 import 'package:chnan/utils/responsive_text.dart';
+import 'package:chnan/utils/const.dart';
 
 class MedicineCard extends StatelessWidget {
   final String name;
-  final String code;
+  final String count;
   final String internalCode;
   final String barcode;
   final String unit;
@@ -12,7 +13,7 @@ class MedicineCard extends StatelessWidget {
   const MedicineCard({
     super.key,
     required this.name,
-    required this.code,
+    required this.count,
     required this.internalCode,
     required this.barcode,
     required this.unit,
@@ -21,20 +22,29 @@ class MedicineCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 6,
+      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+      shadowColor: Colors.black.withOpacity(0.15),
       color: Colors.white,
-      elevation: 3,
-      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+        padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 20),
         child: Directionality(
           textDirection: TextDirection.rtl,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildRow(context, 'اسم المادة:', name),
-              _buildRow(context, 'الرمز الداخلي : ', internalCode),
-              _buildRow(context, 'الوحدة : ', unit),
+              _buildInfoRow(context, Icons.label, 'اسم المادة', name),
+              _buildInfoRow(context, Icons.code, 'الكمية', count),
+              if (internalCode.trim().isNotEmpty)
+                _buildInfoRow(
+                  context,
+                  Icons.lock,
+                  'الرمز الداخلي',
+                  internalCode,
+                ),
+              _buildInfoRow(context, Icons.qr_code, 'الباركود', barcode),
+              _buildInfoRow(context, Icons.straighten, 'الوحدة', unit),
             ],
           ),
         ),
@@ -42,34 +52,37 @@ class MedicineCard extends StatelessWidget {
     );
   }
 
-  Widget _buildRow(BuildContext context, String label, String value) {
+  Widget _buildInfoRow(
+    BuildContext context,
+    IconData icon,
+    String label,
+    String value,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
-      child: Directionality(
-        textDirection: TextDirection.rtl,
-        child: Row(
-          children: [
-            Text(
-              label,
-              style: FontStyleApp.appColor18.copyWith(
-                fontSize: getResponsiveText(context, 15),
-                fontWeight: FontWeight.w600,
-              ),
+      child: Row(
+        children: [
+          Icon(icon, color: kAppColor, size: 20),
+          const SizedBox(width: 10),
+          Text(
+            '$label:',
+            style: FontStyleApp.appColor18.copyWith(
+              fontSize: getResponsiveText(context, 14),
+              fontWeight: FontWeight.w600,
             ),
-            const SizedBox(width: 8),
-            Expanded(
-              child: Text(
-                value,
-                textAlign: TextAlign.right,
-                style: FontStyleApp.black18.copyWith(
-                  fontSize: getResponsiveText(context, 16),
-                  fontWeight: FontWeight.w500,
-                ),
-                overflow: TextOverflow.ellipsis,
+          ),
+          const SizedBox(width: 6),
+          Expanded(
+            child: Text(
+              value,
+              textAlign: TextAlign.right,
+              style: FontStyleApp.black18.copyWith(
+                fontSize: getResponsiveText(context, 14),
               ),
+              overflow: TextOverflow.ellipsis,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
