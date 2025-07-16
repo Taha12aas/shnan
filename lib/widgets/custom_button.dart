@@ -1,9 +1,9 @@
-import 'package:chnan/utils/box_shado.dart';
-import 'package:chnan/utils/const.dart';
-import 'package:chnan/utils/font_style.dart';
-import 'package:chnan/utils/responsive_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:chnan/utils/const.dart';
+import 'package:chnan/utils/box_shado.dart';
+import 'package:chnan/utils/font_style.dart';
+import 'package:chnan/utils/responsive_text.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
@@ -19,49 +19,60 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double boxWidth = MediaQuery.sizeOf(context).width * .20;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final double size = constraints.maxWidth * 0.3;
+        final double iconSize = size * 0.6;
 
-    return GestureDetector(
-      onTap: onTap,
-      child: SizedBox(
-        width: boxWidth,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: boxWidth,
-              height: boxWidth,
-              decoration: BoxDecoration(
-                boxShadow: [bosShadow()],
-                borderRadius: BorderRadius.circular(5),
-                color: kWhite,
-              ),
-              child: Center(
-                child: SvgPicture.asset(
-                  icon,
-                  width: 35,
-                  height: 35,
-                  // ignore: deprecated_member_use
-                  color: kAppColor,
-                ),
-              ),
+        return InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(16),
+          splashColor: kAppColor.withOpacity(0.2),
+          highlightColor: kAppColor.withOpacity(0.1),
+          child: Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: kWhite,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [bosShadow()],
             ),
-            const SizedBox(height: 6),
-            FittedBox(
-              child: Center(
-                child: Text(
-                  text,
-                  textAlign: TextAlign.center,
-
-                  style: FontStyleApp.black18.copyWith(
-                    fontSize: getResponsiveText(context, 12),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: size,
+                  height: size,
+                  decoration: BoxDecoration(
+                    color: kAppColor.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Center(
+                    child: SvgPicture.asset(
+                      icon,
+                      width: iconSize,
+                      height: iconSize,
+                      color: kAppColor,
+                    ),
                   ),
                 ),
-              ),
+                const SizedBox(height: 10),
+                Flexible(
+                  child: Text(
+                    text,
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: FontStyleApp.black18.copyWith(
+                      fontSize: getResponsiveText(context, 14),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

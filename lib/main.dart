@@ -3,14 +3,25 @@ import 'package:chnan/views/accounts_view.dart';
 import 'package:chnan/views/bills_view.dart';
 import 'package:chnan/views/create_a_sales_invoice_view.dart';
 import 'package:chnan/views/home_view.dart';
+import 'package:chnan/views/material_statement_result_view.dart';
+import 'package:chnan/views/material_statement_view.dart';
 import 'package:chnan/views/material_view.dart';
 import 'package:chnan/views/new_account_view.dart';
 import 'package:chnan/views/new_material_view.dart';
 import 'package:chnan/views/review_invoices.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main(List<String> args) {
   runApp(ChananApp());
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      systemNavigationBarColor: Colors.transparent,
+      systemNavigationBarIconBrightness: Brightness.dark,
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+    ),
+  );
 }
 
 class ChananApp extends StatelessWidget {
@@ -37,6 +48,9 @@ class ChananApp extends StatelessWidget {
         ReviewInvoices.id: (context) => ReviewInvoices(),
         NewMedicineView.id: (context) => NewMedicineView(),
         NewAccountView.id: (context) => NewAccountView(),
+        MaterialStatementView.id: (context) => MaterialStatementView(),
+        MaterialStatementResultView.id:
+            (context) => const MaterialStatementResultView(),
       },
     );
   }

@@ -1,6 +1,5 @@
 
 class MedicineModel {
- 
   late String name;
   late String code;
   String? internalCode;

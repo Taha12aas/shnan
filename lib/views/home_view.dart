@@ -1,3 +1,4 @@
+import 'package:chnan/views/material_statement_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:chnan/views/accounts_view.dart';
@@ -22,7 +23,9 @@ class _HomeViewState extends State<HomeView> {
   final List<Widget> _pages = const [
     BillsView(),
     MaterialView(),
+
     AccountsAndMaterialsTab(),
+    MaterialStatementView(),
   ];
 
   @override
@@ -81,10 +84,16 @@ class _HomeViewState extends State<HomeView> {
                           'المواد',
                           1,
                         ),
+
                         _buildNavItem(
-                          'assets/img/Home/si_inventory-line.svg',
+                          'assets/img/Home/tree-structure-thin-svgrepo-com.svg',
                           'الحسابات',
                           2,
+                        ),
+                        _buildNavItem(
+                          'assets/img/Home/si_inventory-line.svg',
+                          'كشف حساب',
+                          3,
                         ),
                       ],
                     ),
