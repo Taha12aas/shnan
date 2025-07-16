@@ -11,8 +11,9 @@ import 'package:chnan/views/new_material_view.dart';
 import 'package:chnan/views/review_invoices.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main(List<String> args) {
+void main(List<String> args) async {
   runApp(ChananApp());
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
@@ -21,6 +22,11 @@ void main(List<String> args) {
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
     ),
+  );
+  await Supabase.initialize(
+    url: 'https://iijuwfvyakftpkndyqzn.supabase.co',
+    anonKey:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlpanV3ZnZ5YWtmdHBrbmR5cXpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI3MDA4ODcsImV4cCI6MjA2ODI3Njg4N30.ou02o28wsUV71B0B8FM4m4CsHgSlJ_ce3nhHFfi9_Zg',
   );
 }
 

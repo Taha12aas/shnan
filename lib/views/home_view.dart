@@ -132,6 +132,6 @@ class AccountsAndMaterialsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const AccountsView(); // عرض الحسابات مباشرة بدون تبويبات داخلية
+    return const AccountsView(); 
   }
 }
