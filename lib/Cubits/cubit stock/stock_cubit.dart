@@ -9,7 +9,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class StockCubit extends Cubit<StockState> {
   StockCubit() : super(StockInitial());
-
   Future<void> fetchMedicinesAndStocks() async {
     emit(StockLoading());
     try {
@@ -22,8 +21,24 @@ class StockCubit extends Cubit<StockState> {
       final stocksData = await StockService.fetchStocks();
       final stocks =
           stocksData.map((json) => StockModel.fromJson(json)).toList();
-      log('كميةالمواد :${stocksData.toString()}');
-      emit(StockLoaded(medicines: medicines, stocks: stocks));
+
+      // حساب الكمية الكلية لكل مادة
+      final Map<String, double> totalQuantities = {};
+      for (var stock in stocks) {
+        final id = stock.medicineId;
+        totalQuantities[id] = (totalQuantities[id] ?? 0) + stock.quantity;
+      }
+
+      // طباعة الكميات الكلية
+      log('الكميات الكلية: $totalQuantities');
+
+      emit(
+        StockLoaded(
+          medicines: medicines,
+          stocks: stocks,
+          totalQuantities: totalQuantities, // أضفها إلى الحالة إذا بتحب
+        ),
+      );
     } catch (e) {
       emit(StockError('حدث خطأ أثناء جلب بيانات المخزون'));
     }

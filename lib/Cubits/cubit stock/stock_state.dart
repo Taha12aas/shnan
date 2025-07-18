@@ -10,10 +10,13 @@ class StockLoading extends StockState {}
 class StockLoaded extends StockState {
   final List<MedicineModel> medicines;
   final List<StockModel> stocks;
+    final Map<String, double> totalQuantities; // ✅ النوع الصحيح
+
 
   StockLoaded({
     required this.medicines,
     required this.stocks,
+    required this.totalQuantities
   });
 }
 

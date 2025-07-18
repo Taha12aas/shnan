@@ -7,15 +7,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MaterialCubit extends Cubit<MaterialStates> {
   MaterialCubit() : super(MaterialInitial());
-
   Future<void> fetchMaterials() async {
     emit(MaterialLoading());
     try {
       final materialsData = await MedicineService.fetchMedicines();
-      final materials =
-          materialsData.map((e) => MedicineModel.fromJson(e)).toList();
 
-      log('الموا :${materialsData.toString()}');
+      log('المواد الخام: $materialsData');
+
+      final filteredData =
+          materialsData.where((element) {
+            log('قيمة isdeleted للمادة: ${element['isdeleted']}');
+            return element['isdeleted'] == false;
+          }).toList();
+
+      log('المواد بعد الفلترة: $filteredData');
+
+      final materials =
+          filteredData.map((e) => MedicineModel.fromJson(e)).toList();
+
       emit(MaterialSuccess(materials: materials));
     } catch (e) {
       emit(MaterialFailure(errorMessage: e.toString()));
@@ -25,6 +34,7 @@ class MaterialCubit extends Cubit<MaterialStates> {
   Future<void> addMaterial(MedicineModel material) async {
     try {
       await MedicineService.insertMedicine(material);
+
       await fetchMaterials();
     } catch (e) {
       emit(MaterialFailure(errorMessage: e.toString()));

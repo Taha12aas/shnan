@@ -1,46 +1,52 @@
 class MedicineModel {
-  /// المعرف الفريد للدواء (UUID)
-  final String id;
-
-  /// اسم الدواء
+  final String? id;
   final String name;
-
-  /// الكود الداخلي الإداري (اختياري في المحاسبة)
-  final String internalCode;
-
-  /// رمز الباركود الخاص بالدواء
   final String barcode;
-
-  /// وحدة القياس (مثلاً: علبة، قطعه، لتر)
+  final String internalCode;
   final String unit;
+  final bool isDeleted; // حقل جديد
 
   MedicineModel({
-    required this.id,
+    this.id,
     required this.name,
-    required this.internalCode,
     required this.barcode,
+    required this.internalCode,
     required this.unit,
+    this.isDeleted = false, // افتراضيًا غير محذوف
   });
 
-  /// تحويل من JSON إلى كائن MedicineModel
-  factory MedicineModel.fromJson(Map<String, dynamic> json) {
+  MedicineModel copyWith({
+    String? id,
+    String? name,
+    String? barcode,
+    String? internalCode,
+    String? unit,
+    bool? isDeleted,
+  }) {
     return MedicineModel(
-      id: json['id'],
-      name: json['name'],
-      internalCode: json['internal_code'],
-      barcode: json['barcode'],
-      unit: json['unit'],
+      id: id ?? this.id,
+      name: name ?? this.name,
+      barcode: barcode ?? this.barcode,
+      internalCode: internalCode ?? this.internalCode,
+      unit: unit ?? this.unit,
+      isDeleted: isDeleted ?? this.isDeleted,
     );
   }
 
-  /// تحويل كائن MedicineModel إلى JSON
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'internal_code': internalCode,
-      'barcode': barcode,
-      'unit': unit,
-    };
-  }
+  factory MedicineModel.fromJson(Map<String, dynamic> json) => MedicineModel(
+    id: json['id'] as String?,
+    name: (json['name'] ?? '') as String,
+    barcode: (json['barcode'] ?? '') as String,
+    internalCode: (json['internal_code'] ?? '') as String,
+    unit: (json['unit'] ?? '') as String,
+    isDeleted: json['isdeleted'] == 1 || json['isdeleted'] == true,
+  );
+
+  Map<String, dynamic> toJson() => {
+    'name': name,
+    'barcode': barcode,
+    'internal_code': internalCode,
+    'unit': unit,
+    'isdeleted': isDeleted ? 1 : 0,
+  };
 }
