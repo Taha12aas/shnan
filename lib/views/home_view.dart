@@ -23,7 +23,6 @@ class _HomeViewState extends State<HomeView> {
   final List<Widget> _pages = const [
     BillsView(),
     MaterialView(),
-
     AccountsAndMaterialsTab(),
     MaterialStatementView(),
   ];
@@ -132,6 +131,6 @@ class AccountsAndMaterialsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const AccountsView(); 
+    return const AccountsView();
   }
 }

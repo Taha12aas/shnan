@@ -1,6 +1,6 @@
 import 'package:chnan/utils/bill_type.dart';
 import 'package:chnan/views/create_a_sales_invoice_view.dart';
-import 'package:chnan/views/review_invoices.dart';
+import 'package:chnan/views/modify_invoice_view.dart';
 import 'package:chnan/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
@@ -50,9 +50,9 @@ class BillsView extends StatelessWidget {
         'onTap': () => _navigateToCreateBill(context, BillType.undoSell),
       },
       {
-        'text': 'استعراض الفواتير',
-        'icon': 'assets/img/home cards/hugeicons_payment-01.svg',
-        'onTap': () => Navigator.pushNamed(context, ReviewInvoices.id),
+        'text': 'أحدث الفواتير',
+        'icon': 'assets/img/Home/arrow-up-right-from-square-svgrepo-com.svg',
+        'onTap': () => Navigator.pushNamed(context, ModifyInvoiceView.id),
       },
     ];
 

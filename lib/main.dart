@@ -1,5 +1,6 @@
 import 'package:chnan/utils/const.dart';
 import 'package:chnan/views/accounts_view.dart';
+import 'package:chnan/views/add_invoice_details_view.dart';
 import 'package:chnan/views/bills_view.dart';
 import 'package:chnan/views/create_a_sales_invoice_view.dart';
 import 'package:chnan/views/home_view.dart';
@@ -8,7 +9,7 @@ import 'package:chnan/views/material_statement_view.dart';
 import 'package:chnan/views/material_view.dart';
 import 'package:chnan/views/new_account_view.dart';
 import 'package:chnan/views/new_material_view.dart';
-import 'package:chnan/views/review_invoices.dart';
+import 'package:chnan/views/modify_invoice_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -51,12 +52,13 @@ class ChananApp extends StatelessWidget {
         BillsView.id: (context) => BillsView(),
         CreateASalesInvoiceView.id: (context) => CreateASalesInvoiceView(),
         MaterialView.id: (context) => MaterialView(),
-        ReviewInvoices.id: (context) => ReviewInvoices(),
+        ModifyInvoiceView.id: (context) => ModifyInvoiceView(),
         NewMedicineView.id: (context) => NewMedicineView(),
         NewAccountView.id: (context) => NewAccountView(),
         MaterialStatementView.id: (context) => MaterialStatementView(),
         MaterialStatementResultView.id:
             (context) => const MaterialStatementResultView(),
+        AddInvoiceDetailsView.id: (context) => AddInvoiceDetailsView(),
       },
     );
   }

@@ -1,3 +1,4 @@
+import 'package:chnan/views/add_invoice_details_view.dart';
 import 'package:chnan/widgets/card.dart';
 import 'package:chnan/widgets/custom_button_save.dart';
 import 'package:chnan/widgets/text_field_barcode.dart';
@@ -10,7 +11,7 @@ class CreateASalesInvoiceView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(title: Text('فاتورة جديدة')),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -39,8 +40,18 @@ class CreateASalesInvoiceView extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    CustomButtonSave(label: 'إلغاء', onTap: () {}),
-                    CustomButtonSave(label: 'التالي', onTap: () {}),
+                    CustomButtonSave(
+                      label: 'إلغاء',
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    CustomButtonSave(
+                      label: 'التالي',
+                      onTap: () {
+                        Navigator.pushNamed(context, AddInvoiceDetailsView.id);
+                      },
+                    ),
                   ],
                 ),
               ),
