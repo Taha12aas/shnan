@@ -1,14 +1,10 @@
-import 'dart:developer';
-
 import 'package:chnan/models/medicine_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class MedicineService {
   static final supabase = Supabase.instance.client;
-
   static Future<List<Map<String, dynamic>>> fetchMedicines() async {
     final response = await supabase.from('medicines').select();
-    log('Medicines: $response');
     return response;
   }
 

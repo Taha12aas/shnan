@@ -1,3 +1,8 @@
+import 'package:chnan/Cubits/cubit%20Account/account_cubit.dart';
+import 'package:chnan/Cubits/cubit%20Invoice%20Items/invoice_items_cubit.dart';
+import 'package:chnan/Cubits/cubit%20Invoice/invoice_cubit.dart';
+import 'package:chnan/Cubits/cubit%20Material/material_cubit.dart';
+import 'package:chnan/Cubits/cubit%20stock/stock_cubit.dart';
 import 'package:chnan/utils/const.dart';
 import 'package:chnan/views/accounts_view.dart';
 import 'package:chnan/views/add_invoice_details_view.dart';
@@ -12,6 +17,7 @@ import 'package:chnan/views/new_material_view.dart';
 import 'package:chnan/views/modify_invoice_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main(List<String> args) async {
@@ -36,30 +42,39 @@ class ChananApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        appBarTheme: const AppBarTheme(
-          iconTheme: IconThemeData(color: Colors.white),
-          backgroundColor: kAppColor,
-          titleTextStyle: TextStyle(color: Colors.white),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => AccountCubit()),
+        BlocProvider(create: (context) => InvoiceCubit()),
+        BlocProvider(create: (context) => InvoiceItemsCubit()),
+        BlocProvider(create: (context) => MaterialCubit()),
+        BlocProvider(create: (context) => StockCubit()),
+      ],
+      child: MaterialApp(
+        theme: ThemeData(
+          appBarTheme: const AppBarTheme(
+            iconTheme: IconThemeData(color: Colors.white),
+            backgroundColor: kAppColor,
+            titleTextStyle: TextStyle(color: Colors.white),
+          ),
         ),
+        debugShowCheckedModeBanner: false,
+        initialRoute: HomeView.id,
+        routes: {
+          HomeView.id: (context) => const HomeView(),
+          AccountsView.id: (context) => AccountsView(),
+          BillsView.id: (context) => BillsView(),
+          CreateASalesInvoiceView.id: (context) => CreateASalesInvoiceView(),
+          MaterialView.id: (context) => MaterialView(),
+          ModifyInvoiceView.id: (context) => ModifyInvoiceView(),
+          NewMedicineView.id: (context) => NewMedicineView(),
+          NewAccountView.id: (context) => NewAccountView(),
+          MaterialStatementView.id: (context) => MaterialStatementView(),
+          MaterialStatementResultView.id:
+              (context) => const MaterialStatementResultView(),
+          AddInvoiceDetailsView.id: (context) => AddInvoiceDetailsView(),
+        },
       ),
-      debugShowCheckedModeBanner: false,
-      initialRoute: HomeView.id,
-      routes: {
-        HomeView.id: (context) => const HomeView(),
-        AccountsView.id: (context) => AccountsView(),
-        BillsView.id: (context) => BillsView(),
-        CreateASalesInvoiceView.id: (context) => CreateASalesInvoiceView(),
-        MaterialView.id: (context) => MaterialView(),
-        ModifyInvoiceView.id: (context) => ModifyInvoiceView(),
-        NewMedicineView.id: (context) => NewMedicineView(),
-        NewAccountView.id: (context) => NewAccountView(),
-        MaterialStatementView.id: (context) => MaterialStatementView(),
-        MaterialStatementResultView.id:
-            (context) => const MaterialStatementResultView(),
-        AddInvoiceDetailsView.id: (context) => AddInvoiceDetailsView(),
-      },
     );
   }
 }

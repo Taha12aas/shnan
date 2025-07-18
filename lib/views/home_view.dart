@@ -1,5 +1,9 @@
+import 'package:chnan/Cubits/cubit%20Account/account_cubit.dart';
+import 'package:chnan/Cubits/cubit%20Material/material_cubit.dart';
+import 'package:chnan/Cubits/cubit%20stock/stock_cubit.dart';
 import 'package:chnan/views/material_statement_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:chnan/views/accounts_view.dart';
 import 'package:chnan/views/bills_view.dart';
@@ -26,6 +30,13 @@ class _HomeViewState extends State<HomeView> {
     AccountsAndMaterialsTab(),
     MaterialStatementView(),
   ];
+  @override
+  void initState() {
+    BlocProvider.of<StockCubit>(context).fetchMedicinesAndStocks();
+    BlocProvider.of<AccountCubit>(context).fetchAccounts();
+    BlocProvider.of<MaterialCubit>(context).fetchMaterials();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

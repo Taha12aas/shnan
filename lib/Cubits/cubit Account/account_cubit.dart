@@ -1,7 +1,9 @@
+import 'dart:developer';
+
 import 'package:chnan/Cubits/cubit%20Account/account_states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:chnan/models/account_model.dart';
-import 'package:chnan/services/account_service.dart'; 
+import 'package:chnan/services/account_service.dart';
 
 class AccountCubit extends Cubit<AccountStates> {
   AccountCubit() : super(AccountInitial());
@@ -10,7 +12,9 @@ class AccountCubit extends Cubit<AccountStates> {
     emit(AccountLoading());
     try {
       final accountsData = await AccountService.fetchAccounts();
-      final accounts = accountsData.map((e) => AccountModel.fromJson(e)).toList();
+      final accounts =
+          accountsData.map((e) => AccountModel.fromJson(e)).toList();
+      log('الحسابات :${accountsData.toString()}');
       emit(AccountSuccess(accounts: accounts));
     } catch (e) {
       emit(AccountFailure(errorMessage: e.toString()));
@@ -26,7 +30,10 @@ class AccountCubit extends Cubit<AccountStates> {
     }
   }
 
-  Future<void> updateAccount(String id, Map<String, dynamic> updatedValues) async {
+  Future<void> updateAccount(
+    String id,
+    Map<String, dynamic> updatedValues,
+  ) async {
     try {
       await AccountService.updateAccount(id, updatedValues);
       await fetchAccounts();

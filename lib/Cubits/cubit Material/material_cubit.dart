@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:chnan/Cubits/cubit%20Material/material_states.dart';
 import 'package:chnan/models/medicine_model.dart';
 import 'package:chnan/services/medicine_service.dart';
@@ -12,6 +14,8 @@ class MaterialCubit extends Cubit<MaterialStates> {
       final materialsData = await MedicineService.fetchMedicines();
       final materials =
           materialsData.map((e) => MedicineModel.fromJson(e)).toList();
+
+      log('الموا :${materialsData.toString()}');
       emit(MaterialSuccess(materials: materials));
     } catch (e) {
       emit(MaterialFailure(errorMessage: e.toString()));
