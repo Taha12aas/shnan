@@ -1,8 +1,8 @@
 class InvoiceItemModel {
-  final String id;
-  final String invoiceId;
-  final String medicineId;
-  final double quantity;
+  final String id;//خاص بالفاتورة
+  final String invoiceId;//رقم الفاتورة المرتبط بهذا السطر (يربطه مع جدول invoices
+  final String medicineId;//مربوط مع المواد
+  final double quantity;//الكمية
 
   InvoiceItemModel({
     required this.id,

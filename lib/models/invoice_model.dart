@@ -1,16 +1,26 @@
 class InvoiceModel {
-  final String id; // id: uuid primary key
-  final String accountId; // account_id
-  final String? createdBy; // created_by (nullable)
-  final String type; // type: 'purchase', 'sale', 'return_sale', 'transport'
+  /// المعرف الفريد للفاتورة (UUID - أساسي في قاعدة البيانات)
+  final String id;
+
+  /// معرف الحساب المرتبط بالفاتورة (مثل مزرعة أو زبون)
+  final String accountId;
+
+  /// معرف المستخدم (الدكتور) الذي أنشأ الفاتورة - يمكن أن يكون null إذا حُذف المستخدم
+  final String? createdBy;
+
+  /// نوع الفاتورة: 'purchase', 'sale', 'return_sale', 'transport'
+  final String type;
+
+  /// تاريخ إصدار الفاتورة
   final DateTime date;
+
+  /// ملاحظات اختيارية تضاف على الفاتورة
   final String? notes;
-  final String? accountingNumber;
+
+  /// هل تم تدقيق الفاتورة من قبل المحاسب؟
   final bool checkedByAccountant;
-  final bool isEdited;
-  final String? editReason;
-  final DateTime? lastModifiedAt;
-  final String? lastModifiedBy;
+
+  /// تاريخ إنشاء الفاتورة
   final DateTime createdAt;
 
   InvoiceModel({
@@ -20,15 +30,11 @@ class InvoiceModel {
     required this.type,
     required this.date,
     this.notes,
-    this.accountingNumber,
     this.checkedByAccountant = false,
-    this.isEdited = false,
-    this.editReason,
-    this.lastModifiedAt,
-    this.lastModifiedBy,
     required this.createdAt,
   });
 
+  /// إنشاء نسخة من الفاتورة من بيانات JSON (قادم من Supabase)
   factory InvoiceModel.fromJson(Map<String, dynamic> json) {
     return InvoiceModel(
       id: json['id'],
@@ -37,18 +43,12 @@ class InvoiceModel {
       type: json['type'],
       date: DateTime.parse(json['date']),
       notes: json['notes'],
-      accountingNumber: json['accounting_number'],
       checkedByAccountant: json['checked_by_accountant'] ?? false,
-      isEdited: json['is_edited'] ?? false,
-      editReason: json['edit_reason'],
-      lastModifiedAt: json['last_modified_at'] != null
-          ? DateTime.parse(json['last_modified_at'])
-          : null,
-      lastModifiedBy: json['last_modified_by'],
       createdAt: DateTime.parse(json['created_at']),
     );
   }
 
+  /// تحويل كائن الفاتورة إلى JSON لإرساله أو تخزينه
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -57,12 +57,7 @@ class InvoiceModel {
       'type': type,
       'date': date.toIso8601String(),
       'notes': notes,
-      'accounting_number': accountingNumber,
       'checked_by_accountant': checkedByAccountant,
-      'is_edited': isEdited,
-      'edit_reason': editReason,
-      'last_modified_at': lastModifiedAt?.toIso8601String(),
-      'last_modified_by': lastModifiedBy,
       'created_at': createdAt.toIso8601String(),
     };
   }

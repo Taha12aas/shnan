@@ -1,10 +1,18 @@
 class MedicineModel {
+  /// المعرف الفريد للدواء (UUID)
   final String id;
+
+  /// اسم الدواء
   final String name;
+
+  /// الكود الداخلي الإداري (اختياري في المحاسبة)
   final String internalCode;
+
+  /// رمز الباركود الخاص بالدواء
   final String barcode;
+
+  /// وحدة القياس (مثلاً: علبة، قطعه، لتر)
   final String unit;
-  final DateTime createdAt;
 
   MedicineModel({
     required this.id,
@@ -12,9 +20,9 @@ class MedicineModel {
     required this.internalCode,
     required this.barcode,
     required this.unit,
-    required this.createdAt,
   });
 
+  /// تحويل من JSON إلى كائن MedicineModel
   factory MedicineModel.fromJson(Map<String, dynamic> json) {
     return MedicineModel(
       id: json['id'],
@@ -22,10 +30,10 @@ class MedicineModel {
       internalCode: json['internal_code'],
       barcode: json['barcode'],
       unit: json['unit'],
-      createdAt: DateTime.parse(json['created_at']),
     );
   }
 
+  /// تحويل كائن MedicineModel إلى JSON
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -33,7 +41,6 @@ class MedicineModel {
       'internal_code': internalCode,
       'barcode': barcode,
       'unit': unit,
-      'created_at': createdAt.toIso8601String(),
     };
   }
 }

@@ -1,39 +1,40 @@
 class AccountModel {
-  final String id;             // ضروري لتتبع الحساب
+  /// المعرّف الفريد للحساب (UUID)
+  final String id;
+
+  /// اسم الحساب (مثل اسم المزرعة أو الزبون)
   final String name;
-  final String type;           // 'farm', 'supplier', 'client'
+
+  /// نوع الحساب: 'farm' (مزرعة)، 'supplier' (مورد)، 'client' (زبون)
+  final String type;
+
+  /// تاريخ إنشاء الحساب (يُسجل تلقائيًا عند الإضافة)
   final DateTime createdAt;
-  final DateTime? updatedAt;
 
   AccountModel({
     required this.id,
     required this.name,
     required this.type,
     required this.createdAt,
-    this.updatedAt,
   });
 
-  // من خريطة JSON إلى الكائن
+  /// تحويل بيانات JSON من Supabase إلى كائن AccountModel
   factory AccountModel.fromJson(Map<String, dynamic> json) {
     return AccountModel(
       id: json['id'],
       name: json['name'],
       type: json['type'],
       createdAt: DateTime.parse(json['created_at']),
-      updatedAt: json['updated_at'] != null
-          ? DateTime.tryParse(json['updated_at'])
-          : null,
     );
   }
 
-  // من الكائن إلى خريطة JSON
+  /// تحويل الكائن إلى JSON لإرساله أو حفظه في Supabase
   Map<String, dynamic> toJson() {
     return {
       'id': id,
       'name': name,
       'type': type,
       'created_at': createdAt.toIso8601String(),
-      'updated_at': updatedAt?.toIso8601String(),
     };
   }
 }
